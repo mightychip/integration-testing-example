@@ -1,0 +1,34 @@
+#Server info...
+---
+server:
+  port: 8085
+---
+management:
+  port: 8081
+---
+logging:
+  level:
+    ROOT: INFO
+    org.springframework: INFO
+    ca.purpleowl.examples.spring.boot: INFO
+---
+
+#This profile is used for integration tests, when we're only running this Spring Boot application.  We still need a
+#database to point to for any integration tests that require one to be present.  This serves that purpose perfectly.
+spring:
+#  profiles: integration
+#  FIXME Uncomment the above line.  This is temporarily serving as the only data source.
+  datasource:
+    username: SA
+    password:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test;mode=MySQL
+  jpa:
+    hibernate:
+      #We don't want this functionality.  We're using Liquibase instead of magic.
+      ddl-auto: none
+    database: h2
+---
+#Maybe I don't need to specify spring.liquibase? Weird.
+liquibase:
+  change-log: classpath:db/changelog/db.example-changelog.xml

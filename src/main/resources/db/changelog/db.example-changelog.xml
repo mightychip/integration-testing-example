@@ -1,0 +1,43 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    
+    <changeSet id="create-fleets" author="mighty_chip">
+        <createTable tableName="fleets">
+            <column name="fleet_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="fleets_PK"/>
+            </column>
+            <column name="fleet_name" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-ships" author="mighty_chip">
+        <createTable tableName="ships">
+            <column name="ship_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="ships_PK" />
+            </column>
+            <column name="ship_name" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="ship_type" type="VARCHAR(16)">
+                <constraints nullable="false" />
+            </column>
+            <column name="ref_fleet_id" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-ship-fleet-relationship" author="mighty_chip">
+        <!-- weird... I don't remember having to be this specific at work... -->
+        <addForeignKeyConstraint constraintName="ships_ref_fleets_PK"
+                                 baseTableName="ships"
+                                 baseColumnNames="ref_fleet_id"
+                                 referencedTableName="fleets"
+                                 referencedColumnNames="fleet_id" />
+    </changeSet>
+    
+</databaseChangeLog>
