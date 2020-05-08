@@ -2,9 +2,16 @@ package ca.purpleowl.springboot.testing.example.jpa.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
+
+import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @Table(name = "fleets")
@@ -17,7 +24,7 @@ public class Fleet {
     @Column(name = "fleet_name")
     private String fleetName;
 
-    @OneToMany
+    @OneToMany(mappedBy = "fleet", cascade = ALL)
     private List<Ship> ships = new ArrayList<>();
 
     public Long getFleetId() {
@@ -43,7 +50,9 @@ public class Fleet {
     }
 
     public Fleet setShips(List<Ship> ships) {
-        this.ships = ships;
+        ships.forEach(ship -> ship.setFleet(this));
+        this.ships.addAll(ships);
+//        this.ships = ships;
         return this;
     }
 }

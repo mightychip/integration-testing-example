@@ -2,7 +2,13 @@ package ca.purpleowl.springboot.testing.example.jpa.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "ships")
@@ -19,7 +25,7 @@ public class Ship {
     private ShipType shipType;
 
     @ManyToOne
-    @JoinColumn(name = "refFleetId")
+    @JoinColumn(name = "fleetId")
     private Fleet fleet;
 
     public Long getShipId() {

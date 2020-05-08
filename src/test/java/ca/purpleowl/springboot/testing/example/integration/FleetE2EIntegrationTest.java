@@ -2,7 +2,7 @@ package ca.purpleowl.springboot.testing.example.integration;
 
 import ca.purpleowl.springboot.testing.example.jpa.entity.Fleet;
 import ca.purpleowl.springboot.testing.example.jpa.repository.FleetRepository;
-import org.junit.Before;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,15 +31,16 @@ public class FleetE2EIntegrationTest {
     @Autowired
     private FleetRepository fleetRepository;
 
-    @Before
-    public void setup() {
-        Fleet fleet = new Fleet().setFleetName("Test Fleet");
-        fleetRepository.save(fleet);
+    @After
+    public void cleanup() {
+        fleetRepository.deleteAll();
     }
 
     @Test
     public void testReadSimpleFleet() {
-        RequestEntity request = RequestEntity
+        Fleet fleet = new Fleet().setFleetName("Test Fleet");
+        fleetRepository.save(fleet);
+        RequestEntity<Void> request = RequestEntity
                 .get(URI.create("/fleets"))
                 .header("Content-Type", "application/json")
                 .build();
@@ -57,7 +58,9 @@ public class FleetE2EIntegrationTest {
 
     @Test
     public void testListFleetNamesSimilarTo() {
-        RequestEntity request = RequestEntity
+        Fleet fleet = new Fleet().setFleetName("Test Fleet");
+        fleetRepository.save(fleet);
+        RequestEntity<Void> request = RequestEntity
                 .get(URI.create("/fleets-like"))
                 .header("Content-Type", "application/json")
                 .build();

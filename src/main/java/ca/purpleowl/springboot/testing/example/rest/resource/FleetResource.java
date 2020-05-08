@@ -47,8 +47,6 @@ public class FleetResource {
     public ResponseEntity<List<String>> getFleetsWithNamesLike(@RequestParam(value = "similarTo") String similarTo) {
         return ResponseEntity.ok()
                              .body(fleetService.fleetNamesSimilarTo(similarTo));
-
-
     }
 
     @JSONGET(path = "/fleet/{fleetId}")
