@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.8.RELEASE</version>
+        <version>2.3.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -23,19 +23,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
     </properties>
-
-<!--    <dependencyManagement>-->
-<!--        <dependencies>-->
-<!--            &lt;!&ndash; I think we might need this, too... but I might be wrong. &ndash;&gt;-->
-<!--            <dependency>-->
-<!--                <groupId>org.springframework.data</groupId>-->
-<!--                <artifactId>spring-data-releasetrain</artifactId>-->
-<!--                <version>${release-train}</version>-->
-<!--                <scope>import</scope>-->
-<!--                <type>pom</type>-->
-<!--            </dependency>-->
-<!--        </dependencies>-->
-<!--    </dependencyManagement>-->
 
     <dependencies>
         <!-- This is needed because it's a Web application -->
@@ -102,7 +89,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.7</version>
+            <version>3.10</version>
         </dependency>
 
         <!-- Useful for development, but not really necessary -->
@@ -124,21 +111,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.spockframework</groupId>
-            <artifactId>spock-core</artifactId>
-            <version>1.1-groovy-2.4</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- This one gives us some more power over what we're mocking... we can mock classes as well as interfaces! -->
-        <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy</artifactId>
-            <version>1.6.5</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
@@ -147,32 +119,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.bsc.maven</groupId>-->
-<!--                <artifactId>maven-processor-plugin</artifactId>-->
-<!--                <version>2.0.5</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>process</id>-->
-<!--                        <goals>-->
-<!--                            <goal>process</goal>-->
-<!--                        </goals>-->
-<!--                        <phase>generate-sources</phase>-->
-<!--                        <configuration>-->
-<!--                            <processors>-->
-<!--                                <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>-->
-<!--                            </processors>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--                <dependencies>-->
-<!--                    <dependency>-->
-<!--                        <groupId>org.hibernate</groupId>-->
-<!--                        <artifactId>hibernate-jpamodelgen</artifactId>-->
-<!--                        <version>${hibernate.version}</version>-->
-<!--                    </dependency>-->
-<!--                </dependencies>-->
-<!--            </plugin>-->
         </plugins>
     </build>
 </project>

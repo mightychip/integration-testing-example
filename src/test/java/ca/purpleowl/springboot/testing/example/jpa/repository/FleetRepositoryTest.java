@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,9 +20,6 @@ import static org.junit.Assert.assertTrue;
 @DataJpaTest
 @RunWith(SpringRunner.class)
 public class FleetRepositoryTest {
-    @PersistenceContext
-    private EntityManager entityManager;
-
     @Autowired
     private FleetRepository fixture;
 
@@ -78,6 +73,7 @@ public class FleetRepositoryTest {
 
         assertTrue(test.isPresent());
         assertEquals(3, test.get().getShips().size());
+        // TODO Everything up to here could be avoided by using an SQL import for this test... should look into that.
 
         List<FleetSummary> result = fixture.summarizeFleets();
 

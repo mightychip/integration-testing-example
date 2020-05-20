@@ -52,7 +52,6 @@ public class Fleet {
     public Fleet setShips(List<Ship> ships) {
         ships.forEach(ship -> ship.setFleet(this));
         this.ships.addAll(ships);
-//        this.ships = ships;
         return this;
     }
 }
